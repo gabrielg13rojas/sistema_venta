@@ -33,7 +33,9 @@ public class TablaCustom extends JPanel {
 	private DefaultTableModel model = null;
 	private JTextField searchField;
 	private JTable table;
-
+	public JTable getTable() {
+		return table;
+	}
 	public DefaultTableModel getModel() {
 		return model;
 	}
@@ -100,39 +102,39 @@ public class TablaCustom extends JPanel {
 		table.getColumnModel().getColumn(1).setPreferredWidth(90);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
 		table.setRowHeight(36);
-		table.setAutoCreateRowSorter(true);
-
-		table.setFillsViewportHeight(true);
-		TableRowSorter<? extends TableModel> sorter = new TableRowSorter<>(model);
-		table.setRowSorter(sorter);
-
-		RendererBuscadorTabla rendBusc = new RendererBuscadorTabla(searchField);
-
-		table.setDefaultRenderer(String.class, rendBusc);
-		searchField.getDocument().addDocumentListener(new DocumentListener() {
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				update();
-			}
-
-			@Override
-			public void removeUpdate(DocumentEvent e) {
-				update();
-			}
-
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-			}
-
-			private void update() {
-				String pattern = searchField.getText().trim();
-				if (pattern.isEmpty()) {
-					sorter.setRowFilter(null);
-				} else if (model.getRowCount() > 0) {
-					sorter.setRowFilter(RowFilter.regexFilter("(?i)" + pattern));
-				}
-			}
-		});
+//		table.setAutoCreateRowSorter(true);
+//
+//		table.setFillsViewportHeight(true);
+//		TableRowSorter<? extends TableModel> sorter = new TableRowSorter<>(model);
+//		table.setRowSorter(sorter);
+//
+//		RendererBuscadorTabla rendBusc = new RendererBuscadorTabla(searchField);
+//
+//		table.setDefaultRenderer(String.class, rendBusc);
+//		searchField.getDocument().addDocumentListener(new DocumentListener() {
+//			@Override
+//			public void insertUpdate(DocumentEvent e) {
+//				update();
+//			}
+//
+//			@Override
+//			public void removeUpdate(DocumentEvent e) {
+//				update();
+//			}
+//
+//			@Override
+//			public void changedUpdate(DocumentEvent e) {
+//			}
+//
+//			private void update() {
+//				String pattern = searchField.getText().trim();
+//				if (pattern.isEmpty()) {
+//					sorter.setRowFilter(null);
+//				} else if (model.getRowCount() > 0) {
+//					sorter.setRowFilter(RowFilter.regexFilter("(?i)" + pattern));
+//				}
+//			}
+//		});
 
 		JScrollPane sp = new JScrollPane(table);
 		sp.setBounds(0, 0, getWidth(), getHeight());

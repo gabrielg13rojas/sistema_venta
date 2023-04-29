@@ -13,6 +13,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -191,6 +193,24 @@ public class TextFieldFormat extends JFormattedTextField {
 			double x = (width - size) / 2;
 			g2.fillRect((int) (x + 2), height - 2, (int) size, 2);
 		}
+	}
+
+	public Date StringADate(String fecha) {
+		SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+		Date fechaDate = null;
+		try {
+			if (!fecha.contains("_")) {
+				fechaDate = fmt.parse(fecha);
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return fechaDate;
+	}
+
+	public String DateAString(Date fecha) {
+		SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+		return fmt.format(fecha);
 	}
 
 	@Override
